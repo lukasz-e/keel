@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/keel-hq/keel/approvals"
+	"github.com/keel-hq/keel/defaults"
 	// "github.com/keel-hq/keel/cache/memory"
 	"github.com/keel-hq/keel/extension/credentialshelper"
 	"github.com/keel-hq/keel/internal/policy"
@@ -133,7 +134,7 @@ func TestWatchTagJobForce(t *testing.T) {
 				Image:        img,
 				Trigger:      types.TriggerTypePoll,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 				Policy:       policy.NewForcePolicy(true),
 			},
 		},
@@ -315,7 +316,7 @@ func TestWatchMultipleTags(t *testing.T) {
 				Image:        imgA,
 				Trigger:      types.TriggerTypePoll,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 				Policy:       policy.NewSemverPolicy(policy.SemverPolicyTypeMajor, true),
 			},
 
@@ -323,7 +324,7 @@ func TestWatchMultipleTags(t *testing.T) {
 				Trigger:      types.TriggerTypePoll,
 				Image:        imgB,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 				Policy:       policy.NewSemverPolicy(policy.SemverPolicyTypeMajor, true),
 			},
 
@@ -331,7 +332,7 @@ func TestWatchMultipleTags(t *testing.T) {
 				Trigger:      types.TriggerTypePoll,
 				Image:        imgC,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 				Policy:       policy.NewForcePolicy(true),
 			},
 
@@ -339,7 +340,7 @@ func TestWatchMultipleTags(t *testing.T) {
 				Trigger:      types.TriggerTypePoll,
 				Image:        imgD,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 				Policy:       policy.NewForcePolicy(true),
 			},
 		},
@@ -511,7 +512,7 @@ func TestWatchTagJobLatestECR(t *testing.T) {
 				Image:        imgA,
 				Trigger:      types.TriggerTypePoll,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 			},
 		},
 	}

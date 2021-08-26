@@ -14,6 +14,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 
 	"github.com/keel-hq/keel/approvals"
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/extension/notification"
 	"github.com/keel-hq/keel/internal/k8s"
 	"github.com/keel-hq/keel/internal/policy"
@@ -169,10 +170,10 @@ func (p *Provider) TrackedImages() ([]*types.TrackedImage, error) {
 					"name":      gr.Name,
 					"namespace": gr.Namespace,
 				}).Error("provider.kubernetes: failed to parse poll schedule, setting default schedule")
-				schedule = types.KeelPollDefaultSchedule
+				schedule = *defaults.PollSchedule
 			}
 		} else {
-			schedule = types.KeelPollDefaultSchedule
+			schedule = *defaults.PollSchedule
 		}
 
 		// trigger type, we only care for "poll" type triggers

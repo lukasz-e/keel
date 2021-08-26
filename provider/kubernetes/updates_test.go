@@ -5,6 +5,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/internal/k8s"
 	"github.com/keel-hq/keel/internal/policy"
 	"github.com/keel-hq/keel/types"
@@ -153,7 +154,7 @@ func TestProvider_checkForUpdate(t *testing.T) {
 						Name:      "dep-1",
 						Namespace: "xxxx",
 						Annotations: map[string]string{
-							types.KeelPollScheduleAnnotation: types.KeelPollDefaultSchedule,
+							types.KeelPollScheduleAnnotation: defaults.PollScheduleDefault,
 						},
 						Labels: map[string]string{
 							types.KeelPolicyLabel: "all",
@@ -254,7 +255,7 @@ func TestProvider_checkForUpdate(t *testing.T) {
 					meta_v1.ObjectMeta{
 						Name:        "dep-1",
 						Namespace:   "xxxx",
-						Annotations: map[string]string{types.KeelPollScheduleAnnotation: types.KeelPollDefaultSchedule},
+						Annotations: map[string]string{types.KeelPollScheduleAnnotation: defaults.PollScheduleDefault},
 						Labels:      map[string]string{types.KeelPolicyLabel: "force"},
 					},
 					apps_v1.DeploymentSpec{
@@ -283,7 +284,7 @@ func TestProvider_checkForUpdate(t *testing.T) {
 						Name:      "dep-1",
 						Namespace: "xxxx",
 						Annotations: map[string]string{
-							types.KeelPollScheduleAnnotation: types.KeelPollDefaultSchedule,
+							types.KeelPollScheduleAnnotation: defaults.PollScheduleDefault,
 						},
 						Labels: map[string]string{types.KeelPolicyLabel: "force"},
 					},

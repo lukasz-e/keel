@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/keel-hq/keel/approvals"
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/pkg/store/sql"
 
 	// "github.com/keel-hq/keel/cache/memory"
@@ -59,14 +60,14 @@ func TestCheckDeployment(t *testing.T) {
 				Image:        imgA,
 				Trigger:      types.TriggerTypePoll,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 			},
 
 			{
 				Trigger:      types.TriggerTypePoll,
 				Image:        imgB,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 			},
 		},
 	}
@@ -104,7 +105,7 @@ func TestCheckDeployment(t *testing.T) {
 	if watcher.watched[keyA].digest != frc.digestToReturn {
 		t.Errorf("unexpected digest")
 	}
-	if watcher.watched[keyA].schedule != types.KeelPollDefaultSchedule {
+	if watcher.watched[keyA].schedule != defaults.PollScheduleDefault {
 		t.Errorf("unexpected schedule: %s", watcher.watched[keyA].schedule)
 	}
 	if watcher.watched[keyA].trackedImage.Image.Remote() != ref.Remote() {
@@ -119,7 +120,7 @@ func TestCheckDeployment(t *testing.T) {
 	if watcher.watched[keyB].digest != frc.digestToReturn {
 		t.Errorf("unexpected digest")
 	}
-	if watcher.watched[keyB].schedule != types.KeelPollDefaultSchedule {
+	if watcher.watched[keyB].schedule != defaults.PollScheduleDefault {
 		t.Errorf("unexpected schedule: %s", watcher.watched[keyB].schedule)
 	}
 	if watcher.watched[keyB].trackedImage.Image.Remote() != refB.Remote() {
@@ -148,7 +149,7 @@ func TestCheckECRDeployment(t *testing.T) {
 				Image:        imgA,
 				Trigger:      types.TriggerTypePoll,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 			},
 		},
 	}
@@ -185,7 +186,7 @@ func TestCheckECRDeployment(t *testing.T) {
 	if watcher.watched[keyA].digest != "sha256:7712aa425c17c2e413e5f4d64e2761eda009509d05d0e45a26e389d715aebe23" {
 		t.Errorf("unexpected digest: %s", watcher.watched[keyA].digest)
 	}
-	if watcher.watched[keyA].schedule != types.KeelPollDefaultSchedule {
+	if watcher.watched[keyA].schedule != defaults.PollScheduleDefault {
 		t.Errorf("unexpected schedule: %s", watcher.watched[keyA].schedule)
 	}
 	if watcher.watched[keyA].trackedImage.Image.Remote() != imgA.Remote() {

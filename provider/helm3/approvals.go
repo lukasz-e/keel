@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/pkg/store"
 	"github.com/keel-hq/keel/types"
 
@@ -60,7 +61,7 @@ func (p *Provider) isApproved(event *types.Event, plan *UpdatePlan) (bool, error
 			}
 
 			if plan.Config.ApprovalDeadline == 0 {
-				plan.Config.ApprovalDeadline = types.KeelApprovalDeadlineDefault
+				plan.Config.ApprovalDeadline = *defaults.ApprovalDeadline
 			}
 
 			// creating new one

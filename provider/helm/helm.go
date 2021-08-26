@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/keel-hq/keel/approvals"
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/internal/policy"
 	"github.com/keel-hq/keel/types"
 	"github.com/keel-hq/keel/util/image"
@@ -206,7 +207,7 @@ func (p *Provider) TrackedImages() ([]*types.TrackedImage, error) {
 		}
 
 		if cfg.PollSchedule == "" {
-			cfg.PollSchedule = types.KeelPollDefaultSchedule
+			cfg.PollSchedule = *defaults.PollSchedule
 		}
 		// used to check pod secrets
 		selector := fmt.Sprintf("app=%s,release=%s", release.Chart.Metadata.Name, release.Name)

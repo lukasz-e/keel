@@ -6,7 +6,6 @@ import (
 	"os/signal"
 	"path/filepath"
 	"time"
-
 	"context"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -25,6 +24,7 @@ import (
 	"github.com/keel-hq/keel/pkg/store/sql"
 
 	"github.com/keel-hq/keel/constants"
+	_ "github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/extension/credentialshelper"
 	"github.com/keel-hq/keel/extension/notification"
 	"github.com/keel-hq/keel/internal/k8s"
@@ -80,6 +80,9 @@ const (
 	// EnvDefaultDockerRegistryCfg - default registry configuration that can be passed into
 	// keel for polling trigger
 	EnvDefaultDockerRegistryCfg = "DOCKER_REGISTRY_CFG"
+
+    // Overriding default values for policy params
+    EnvDefaultApprovalDeadline = "DEFAULT_APPROVAL_DEADLINE"
 )
 
 // kubernetes config, if empty - will default to InCluster
@@ -96,7 +99,6 @@ func main() {
 	inCluster := kingpin.Flag("incluster", "use in cluster configuration (defaults to 'true'), use '--no-incluster' if running outside of the cluster").Default("true").Bool()
 	kubeconfig := kingpin.Flag("kubeconfig", "path to kubeconfig (if not in running inside a cluster)").Default(filepath.Join(os.Getenv("HOME"), ".kube", "config")).String()
 	uiDir := kingpin.Flag("ui-dir", "path to web UI static files").Default("www").Envar(EnvUIDir).String()
-
 	kingpin.UsageTemplate(kingpin.CompactUsageTemplate).Version(ver.Version)
 	kingpin.CommandLine.Help = "Automated Kubernetes deployment updates. Learn more on https://keel.sh."
 	kingpin.Parse()

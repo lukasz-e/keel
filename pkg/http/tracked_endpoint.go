@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/types"
 )
 
@@ -83,7 +84,7 @@ func (s *TriggerServer) trackSetHandler(resp http.ResponseWriter, req *http.Requ
 			return
 		}
 	} else {
-		trackReq.Schedule = types.KeelPollDefaultSchedule
+		trackReq.Schedule = *defaults.PollSchedule
 	}
 
 	for _, v := range s.grc.Values() {

@@ -38,9 +38,6 @@ const KeelMatchPreReleaseAnnotation = "keel.sh/matchPreRelease"
 // KeelPollScheduleAnnotation - optional variable to setup custom schedule for polling, defaults to @every 10m
 const KeelPollScheduleAnnotation = "keel.sh/pollSchedule"
 
-// KeelPollDefaultSchedule - defaul polling schedule
-const KeelPollDefaultSchedule = "@every 1m"
-
 // KeelDigestAnnotation - digest annotation
 const KeelDigestAnnotation = "keel.sh/digest"
 
@@ -56,9 +53,6 @@ const KeelUpdateTimeAnnotation = "keel.sh/update-time"
 
 // KeelApprovalDeadlineLabel - approval deadline
 const KeelApprovalDeadlineLabel = "keel.sh/approvalDeadline"
-
-// KeelApprovalDeadlineDefault - default deadline in hours
-const KeelApprovalDeadlineDefault = 24
 
 // KeelReleasePage - optional release notes URL passed on with notification
 const KeelReleaseNotesURL = "keel.sh/releaseNotes"

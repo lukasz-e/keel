@@ -11,6 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/keel-hq/keel/approvals"
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/extension/credentialshelper"
 	"github.com/keel-hq/keel/internal/policy"
 	"github.com/keel-hq/keel/provider"
@@ -27,7 +28,7 @@ func TestWatchMultipleTagsWithSemver(t *testing.T) {
 				Image:        imgA,
 				Trigger:      types.TriggerTypePoll,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 				Policy:       policy.NewSemverPolicy(policy.SemverPolicyTypeAll, true),
 			},
 		},
@@ -230,7 +231,7 @@ func TestWatchMultipleTagsWithCredentialsHelper(t *testing.T) {
 				Image:        imgA,
 				Trigger:      types.TriggerTypePoll,
 				Provider:     "fp",
-				PollSchedule: types.KeelPollDefaultSchedule,
+				PollSchedule: defaults.PollScheduleDefault,
 				Policy:       policy.NewSemverPolicy(policy.SemverPolicyTypeAll, true),
 			},
 		},

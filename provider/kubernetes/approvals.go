@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/keel-hq/keel/defaults"
 	"github.com/keel-hq/keel/pkg/store"
 	"github.com/keel-hq/keel/types"
 
@@ -72,7 +73,15 @@ func (p *Provider) isApproved(event *types.Event, plan *UpdatePlan) (bool, error
 
 	minApprovals, err := getInt(types.KeelMinimumApprovalsLabel, plan.Resource.GetLabels(), plan.Resource.GetAnnotations())
 	if err != nil {
-		return false, err
+        if defaults.MinimumApprovals != nil {
+            log.WithFields(log.Fields{
+                "error":    err,
+                "resource": plan.Resource.GetName(),
+            }).Warn("failed to parse required approvals count, using default value")
+            minApprovals = *defaults.MinimumApprovals
+        } else {
+		    return false, err
+        }
 	}
 
 	if minApprovals == 0 {
@@ -80,7 +89,7 @@ func (p *Provider) isApproved(event *types.Event, plan *UpdatePlan) (bool, error
 	}
 
 	// deadline
-	deadline := types.KeelApprovalDeadlineDefault
+	deadline := *defaults.ApprovalDeadline
 	d, err := getInt(types.KeelApprovalDeadlineLabel, plan.Resource.GetLabels(), plan.Resource.GetAnnotations())
 	if err != nil {
 		log.WithFields(log.Fields{
