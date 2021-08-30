@@ -196,7 +196,7 @@ func (p *Provider) TrackedImages() ([]*types.TrackedImage, error) {
 			continue
 		}
 
-		cfg, err := getKeelConfig(vals)
+		_, err = getKeelConfig(vals)
 		if err != nil {
 			log.WithFields(log.Fields{
 				"error":     err,
@@ -206,9 +206,6 @@ func (p *Provider) TrackedImages() ([]*types.TrackedImage, error) {
 			continue
 		}
 
-		if cfg.PollSchedule == "" {
-			cfg.PollSchedule = *defaults.PollSchedule
-		}
 		// used to check pod secrets
 		selector := fmt.Sprintf("app=%s,release=%s", release.Chart.Metadata.Name, release.Name)
 
@@ -469,5 +466,9 @@ func getKeelConfig(vals chartutil.Values) (*KeelChartConfig, error) {
 
 	cfg.Plc = policy.GetPolicy(cfg.Policy, &policy.Options{MatchTag: cfg.MatchTag, MatchPreRelease: cfg.MatchPreRelease})
 
+    //apply defaults
+	if cfg.PollSchedule == "" {
+		cfg.PollSchedule = *defaults.PollSchedule
+	}
 	return &cfg, nil
 }
